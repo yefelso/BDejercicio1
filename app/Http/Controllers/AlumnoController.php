@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Alumno;
 use IlluminateSupportFacadesRoute;
-class PostController extends Controller
+class AlumnoController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -12,8 +12,8 @@ class PostController extends Controller
    */
   public function index()
   {
-    $posts = alumnos::all();
-    return view('posts.index', compact('posts'));
+    $alumnos = Alumno::all();
+    return view('posts.index', compact('alumnos'));
   }
   /**
    * Store a newly created resource in storage.
@@ -24,12 +24,16 @@ class PostController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'title' => 'required|max:255',
-      'body' => 'required',
-    ]);
-    Post::create($request->all());
+      'nombre' => 'required',
+      'apellido' => 'required',
+      'edad' => 'required|integer',
+      'curso' => 'required',
+      'grado_seccion' => 'required',
+  ]);
+
+    ALumno::create($request->all());
     return redirect()->route('posts.index')
-      ->with('success', 'Post created successfully.');
+      ->with('success', 'alumno created successfully.');
   }
   /**
    * Update the specified resource in storage.
@@ -41,13 +45,16 @@ class PostController extends Controller
   public function update(Request $request, $id)
   {
     $request->validate([
-      'title' => 'required|max:255',
-      'body' => 'required',
-    ]);
-    $post = Post::find($id);
-    $post->update($request->all());
+      'nombre' => 'required',
+      'apellido' => 'required',
+      'edad' => 'required|integer',
+      'curso' => 'required',
+      'grado_seccion' => 'required',
+  ]);
+    $alumnos = Alumno::find($id);
+    $alumnos->update($request->all());
     return redirect()->route('posts.index')
-      ->with('success', 'Post updated successfully.');
+      ->with('success', 'Alumno updated successfully.');
   }
   /**
    * Remove the specified resource from storage.
@@ -57,10 +64,10 @@ class PostController extends Controller
    */
   public function destroy($id)
   {
-    $post = Post::find($id);
-    $post->delete();
+    $alumnos = Alumno::find($id);
+    $alumnos->delete();
     return redirect()->route('posts.index')
-      ->with('success', 'Post deleted successfully');
+      ->with('success', 'Alumno deleted successfully');
   }
   // routes functions
   /**
@@ -80,8 +87,8 @@ class PostController extends Controller
    */
   public function show($id)
   {
-    $post = Post::find($id);
-    return view('posts.show', compact('post'));
+    $alumnos = Alumno::find($id);
+    return view('posts.show', compact('alumnos'));
   }
   /**
    * Show the form for editing the specified post.
@@ -91,7 +98,7 @@ class PostController extends Controller
    */
   public function edit($id)
   {
-    $post = Post::find($id);
-    return view('posts.edit', compact('post'));
+    $alumnos = Alumno::find($id);
+    return view('posts.edit', compact('alumnos'));
   }
 }
