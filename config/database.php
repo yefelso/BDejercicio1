@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -108,8 +108,14 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'dsn'      => env('MONGO_DB_DSN', 'mongodb://127.0.0.1:27017'),
+            'database' => env('MONGO_DB_DATABASE', 'yefell'),
+        ],
 
     ],
+        
 
     /*
     |--------------------------------------------------------------------------

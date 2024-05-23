@@ -1,32 +1,33 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use MongoDB\Laravel\Schema\Blueprint; // Asegúrate de importar el Blueprint correcto
 
-return new class extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up(): void
     {
-        Schema::create('alumnos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->unsignedTinyInteger('edad');
-            $table->string('curso');
-            $table->string('grado_seccion');
-            $table->timestamps();
+        Schema::connection('mongodb')->create('alumnos', function (Blueprint $collection) {
+            $collection->index('nombre');
+            $collection->index('apellido');
+            $collection->index('edad');
+            $collection->index('curso');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down(): void
     {
-        Schema::dropIfExists('alumnos');
+        Schema::connection('mongodb')->dropIfExists('alumnos');
     }
-};
+}

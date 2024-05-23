@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Alumno extends Model
+class Alumno extends Eloquent
 {
-    use HasFactory;
-
     // Nombre de la tabla en la base de datos
-    protected $table = 'alumnos';
+    protected $collection = 'alumnos'; // MongoDB usa 'collection' en lugar de 'table'
 
-    // Nombre de la columna que sirve como clave primaria en la tabla
-    // Por defecto, Eloquent asume que el nombre de la columna primaria es 'id'
-    protected $primaryKey = 'id';
+    // Nombre de la columna que sirve como clave primaria en la colección
+    protected $primaryKey = '_id'; // MongoDB usa '_id' como clave primaria por defecto
 
     protected $fillable = [
         'nombre',
