@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    <h1>AgregarAlumno</h1>
+    <a href="{{ route('posts.create') }}" class="btn btn-info">Agregar Alumno</a>
+        </div>
+<div class="container">
     <h1>Lista de Alumnos</h1>
     @if (session('success'))
         <div class="alert alert-success">
